@@ -31,7 +31,6 @@ module.exports = function(app) {
             if (err){
                 res.send(err);
             }
-            console.log(journey);
 
             if(journey == null){
             	res.status(500).send("Journey not found! Please check the journey that you are chosing");
@@ -104,23 +103,6 @@ module.exports = function(app) {
 		            journey.current_pos[0] = current[0];
 		            journey.current_pos[1] = current[1]; 
 
-		            
-
-				  //   var maxDistanceAllowed = 5/6371; // divided by radiusof earth
-				  //   Journey.find({
-				  //   	current_pos: {
-				  //   		$near: current,
-				  //   		$maxDistance: maxDistanceAllowed
-				  //   	}
-				  //   }).exec(function(err, locations){
-				  //   	if (err) {
-						// 	return res.json(500, err);
-						// }
-
-						// res.json(200, locations);
-				  //   });
-
-
 		            //update checkpoints with near query 
 		            var checkpoints = journey.checkpoints;
 		            for(var i=0;i<checkpoints.length;i++){
@@ -133,9 +115,6 @@ module.exports = function(app) {
 		               	}
 
 		            }
-
-
-
 
 		            console.log("updated journey is", journey);
 		            var journeyId = journey._id;
@@ -160,9 +139,8 @@ module.exports = function(app) {
 
 
 
-
+	// get api for tracking number 
 	app.get('/getshipment/:id',function(req, res){
-
     	AirwayBill.find({"tracking_id":req.params.id}, function(err, airwaybill){
     		if(err)
     			res.send(err);
@@ -173,7 +151,6 @@ module.exports = function(app) {
     		else if(airwaybill.length > 1)
     			res.status(500).send("There is some discrepency as many bills with same tracking id is there ");
     		else{
-    			console.log(airwaybill);
 				AirwayBill
 					.find({"tracking_id":req.params.id})
 					.populate("journey_id")
@@ -182,7 +159,6 @@ module.exports = function(app) {
 							return handleError(err);
 						
 						//airwaybills is the airway bill to be tracked
-						console.log(airwaybills);
 						
 						airwaybill = airwaybills[0];
 						var journey = airwaybill.journey_id;
@@ -223,7 +199,6 @@ module.exports = function(app) {
 						if(shipmentStarted){
 							current = journey.current_pos;
 						}
-						console.log("------------");
 						var ans = {};
 						ans.start_port = start_port;
 						ans.end_port = end_port;
@@ -239,31 +214,11 @@ module.exports = function(app) {
 							ans.current = [];
 						}
 
-						console.log("start_port", start_port);
-						console.log("end_port", end_port);
-						if(shipmentStarted){
-							console.log("markers are ",markers);
-							console.log("current is ",current);
-						}
-
-
 						res.send(ans);
-					});   
-				 // res.send() 			
+					});   		
     		}
     	});
     });
 
-
-
-	// server routes ===========================================================
-	// handle things like api calls
-	// authentication routes
-
-	// frontend routes =========================================================
-	// route to handle all angular requests
-	// app.get('*', function(req, res) {
-	// 	res.sendfile('./public/index.html');
-	// });
 
 };

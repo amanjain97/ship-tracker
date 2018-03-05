@@ -2,7 +2,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
 var journeySchema = new Schema({
 	journey_id: String,
 	ship_id: String,
@@ -14,7 +13,5 @@ var journeySchema = new Schema({
 	isCompleted: Boolean
 });
 
-
-// define our nerd model
 // module.exports allows us to pass this to other files when it is called
 module.exports = mongoose.model('Journey', journeySchema);

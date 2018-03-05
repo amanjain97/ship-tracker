@@ -1,5 +1,5 @@
 {
-  "name": "starter-node-angular",
+  "name": "ship-tracker",
   "main": "server.js",
   "dependencies": {
     "body-parser": "~1.4.2",
@@ -7,5 +7,21 @@
     "method-override": "~2.0.2",
     "mongoose": "~3.8.0",
     "toastr": "^2.1.4"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "version": "1.0.0",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amanjain97/ship-tracker.git"
+  },
+  "author": "amanjain97",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amanjain97/ship-tracker/issues"
+  },
+  "homepage": "https://github.com/amanjain97/ship-tracker#readme",
+  "description": ""
 }

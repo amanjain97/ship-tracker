@@ -1,1 +1,1 @@
-angular.module('sampleApp', ['ngRoute',  'NerdCtrl']);
+angular.module('sampleApp', ['ngRoute',  'Ctrl']);
